@@ -1,0 +1,82 @@
+<!DOCTYPE html> 
+<html lang="it"> 
+<head>
+    <meta charset="UTF-8"> 
+    <title>Calcolatrice Semplice</title> 
+</head>
+<body>
+
+<h1>Calcolatrice</h1> 
+
+<form id="calculatorForm" onsubmit="calcola(); return false;"> <!-- form che richiama la funzione calcola() quando si preme il pulsante -->
+    Primo numero: <input type="text" id="num1" required><br> <!-- campo di input per il primo numero -->
+    Secondo numero: <input type="text" id="num2" required><br> <!-- campo di input per il secondo numero -->
+    Operazione: <input type="text" id="operation" placeholder="+, -, *, /, **" required><br> <!-- campo per inserire l'operazione -->
+    <button type="submit">Calcola</button> <!-- pulsante che invia il form -->
+</form>
+
+<!-- Div per visualizzare il risultato o gli errori -->
+<div id="result"></div> 
+
+<script>
+
+function calcola() { // funzione eseguita quando si invia il form
+
+    // lettura dei valori inseriti
+    const num1Input = document.getElementById('num1').value; // prende il valore inserito nel primo campo
+    const num2Input = document.getElementById('num2').value; // prende il valore inserito nel secondo campo
+    const operation = document.getElementById('operation').value.trim(); // prende l'operazione e rimuove eventuali spazi
+    const resultDiv = document.getElementById('result'); // seleziona il div dove verrà mostrato il risultato
+
+    // conversione in numeri
+    const num1 = parseFloat(num1Input); // converte il primo valore da stringa a numero decimale
+    const num2 = parseFloat(num2Input); // converte il secondo valore da stringa a numero decimale
+
+    // controllo validità numeri
+    if (Number.isNaN(num1) || Number.isNaN(num2)) { // controlla se uno dei due valori non è un numero
+        resultDiv.textContent = "Errore: Inserisci due numeri validi."; // mostra un messaggio di errore
+        return; // interrompe l'esecuzione della funzione
+    }
+
+    let result; // variabile che conterrà il risultato del calcolo
+
+    try { // blocco che prova ad eseguire il codice e gestisce eventuali errori
+
+        if (operation === "+") { // controlla se l'operazione richiesta è una somma
+            result = num1 + num2; // esegue la somma
+        }
+        else if (operation === "-") { // controlla se l'operazione richiesta è una sottrazione
+            result = num1 - num2; // esegue la sottrazione
+        }
+        else if (operation === "*") { // controlla se l'operazione richiesta è una moltiplicazione
+            result = num1 * num2; // esegue la moltiplicazione
+        }
+        else if (operation === "/") { // controlla se l'operazione richiesta è una divisione
+
+            if(num2 === 0){ // verifica se il secondo numero è zero
+                throw new Error("Divisione per zero non possibile"); // genera un errore se si tenta di dividere per zero
+            }
+
+            result = num1 / num2; // esegue la divisione
+        }
+        else if (operation === "**") { // controlla se l'operazione richiesta è una potenza
+            result = num1 ** num2; // calcola la potenza (num1 elevato a num2)
+        }
+        else { // se l'operazione inserita non è tra quelle previste
+            throw new Error("Operazione non valida"); // genera un errore
+        }
+
+        resultDiv.textContent = "Risultato: " + result; // mostra il risultato nella pagina
+
+    } catch (error) { // cattura eventuali errori generati nel blocco try
+
+        resultDiv.textContent = "Errore: " + error.message; // mostra il messaggio di errore nella pagina
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
