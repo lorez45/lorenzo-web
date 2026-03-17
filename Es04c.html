@@ -1,68 +1,153 @@
-<!DOCTYPE html> 
-<html lang="it"> 
+<!DOCTYPE html>
+<html lang="it">
 <head>
-    <meta charset="UTF-8"> 
-    <title>Calcolatrice Semplice</title> 
+<meta charset="UTF-8">
+<title>Calcolatrice</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #3a3a5f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* contenitore principale */
+.calculator {
+    background: #222;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    width: 320px;
+}
+
+/* display */
+.display {
+    background: #111;
+    color: #00ffcc;
+    font-size: 26px;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: right;
+    min-height: 40px;
+}
+
+/* input */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* bottoni */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+button {
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #444;
+    color: white;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background: #666;
+    transform: scale(1.05);
+}
+
+/* bottone uguale */
+.equals {
+    background: #00c896;
+    color: black;
+    grid-column: span 2;
+}
+
+.equals:hover {
+    background: #00e6aa;
+}
+
+/* operazioni */
+.operator {
+    background: #ff9500;
+}
+
+.operator:hover {
+    background: #ffaa33;
+}
+</style>
 </head>
+
 <body>
 
-<h1>Calcolatrice</h1> 
+<div class="calculator">
+    <div id="result" class="display">Risultato: 0</div>
 
-<form id="calculatorForm" onsubmit="calcola(); return false;"> <!-- form che richiama la funzione calcola() quando si preme il pulsante -->
-    Primo numero: <input type="text" id="num1" required><br> <!-- campo di input per il primo numero -->
-    Secondo numero: <input type="text" id="num2" required><br> <!-- campo di input per il secondo numero -->
-    Operazione: <input type="text" id="operation" placeholder="+, -, *, /, **" required><br> <!-- campo per inserire l'operazione -->
-    <button type="submit">Calcola</button> <!-- pulsante che invia il form -->
-</form>
+    <input type="number" id="num1" placeholder="Primo numero">
+    <input type="number" id="num2" placeholder="Secondo numero">
 
-<!-- Div per visualizzare il risultato o gli errori -->
-<div id="result"></div> 
+    <div class="buttons">
+        <button class="operator" onclick="calculate('+')">+</button>
+        <button class="operator" onclick="calculate('-')">-</button>
+        <button class="operator" onclick="calculate('*')">*</button>
+        <button class="operator" onclick="calculate('/')">/</button>
+
+        <button class="operator" onclick="calculate('**')">^</button>
+        <button onclick="clearFields()">C</button>
+        <button class="equals" onclick="calculate('+')">=</button>
+    </div>
+</div>
 
 <script>
+function calculate(operation) {
 
-function calcola() { // funzione eseguita quando si invia il form
+    let num1 = parseFloat(document.getElementById("num1").value);
+    let num2 = parseFloat(document.getElementById("num2").value);
+    let resultDiv = document.getElementById("result");
 
-    // lettura dei valori inseriti
-    const num1Input = document.getElementById('num1').value; // prende il valore inserito nel primo campo
-    const num2Input = document.getElementById('num2').value; // prende il valore inserito nel secondo campo
-    const operation = document.getElementById('operation').value.trim(); // prende l'operazione e rimuove eventuali spazi
-    const resultDiv = document.getElementById('result'); // seleziona il div dove verrà mostrato il risultato
-
-    // conversione in numeri
-    const num1 = parseFloat(num1Input); // converte il primo valore da stringa a numero decimale
-    const num2 = parseFloat(num2Input); // converte il secondo valore da stringa a numero decimale
-
-    // controllo validità numeri
-    if (Number.isNaN(num1) || Number.isNaN(num2)) { // controlla se uno dei due valori non è un numero
+    if (isNaN(num1) || isNaN(num2)) {
         resultDiv.textContent = "Errore: Inserisci due numeri validi."; // mostra un messaggio di errore
         return; // interrompe l'esecuzione della funzione
     }
 
-    let result; // variabile che conterrà il risultato del calcolo
+    let result; // variabile che conterra' il risultato del calcolo
 
     try { // blocco che prova ad eseguire il codice e gestisce eventuali errori
 
-        if (operation === "+") { // controlla se l'operazione richiesta è una somma
+        if (operation === "+") { // controlla se l'operazione richiesta e' una somma
             result = num1 + num2; // esegue la somma
         }
-        else if (operation === "-") { // controlla se l'operazione richiesta è una sottrazione
+        else if (operation === "-") { // controlla se l'operazione richiesta e' una sottrazione
             result = num1 - num2; // esegue la sottrazione
         }
-        else if (operation === "*") { // controlla se l'operazione richiesta è una moltiplicazione
+        else if (operation === "*") { // controlla se l'operazione richiesta e' una moltiplicazione
             result = num1 * num2; // esegue la moltiplicazione
         }
-        else if (operation === "/") { // controlla se l'operazione richiesta è una divisione
+        else if (operation === "/") { // controlla se l'operazione richiesta e' una divisione
 
-            if(num2 === 0){ // verifica se il secondo numero è zero
+            if(num2 === 0){ // verifica se il secondo numero e' zero
                 throw new Error("Divisione per zero non possibile"); // genera un errore se si tenta di dividere per zero
             }
 
             result = num1 / num2; // esegue la divisione
         }
-        else if (operation === "**") { // controlla se l'operazione richiesta è una potenza
+        else if (operation === "**") { // controlla se l'operazione richiesta e' una potenza
             result = num1 ** num2; // calcola la potenza (num1 elevato a num2)
         }
-        else { // se l'operazione inserita non è tra quelle previste
+        else { // se l'operazione inserita non e' tra quelle previste
             throw new Error("Operazione non valida"); // genera un errore
         }
 
@@ -76,6 +161,11 @@ function calcola() { // funzione eseguita quando si invia il form
 
 }
 
+function clearFields(){
+    document.getElementById("num1").value = "";
+    document.getElementById("num2").value = "";
+    document.getElementById("result").textContent = "Risultato: 0";
+}
 </script>
 
 </body>
