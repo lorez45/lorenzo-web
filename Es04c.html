@@ -1,172 +1,173 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<title>Calcolatrice</title>
+  <meta charset="UTF-8">
+  <title>Form Persona</title>
 
-<style>
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1e1e2f, #3a3a5f);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+  <style>
+    /* Stile generale della pagina */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #3a3a5f);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
 
-/* contenitore principale */
-.calculator {
-    background: #222;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-    width: 320px;
-}
+    /* Contenitore migliorato (più scuro e coerente col background) */
+    .container {
+      background: rgba(40, 40, 70, 0.8); /* colore più coerente */
+      backdrop-filter: blur(12px);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      width: 320px;
+      text-align: center;
+      color: #fff;
+      animation: fadeIn 1s ease;
+    }
 
-/* display */
-.display {
-    background: #111;
-    color: #00ffcc;
-    font-size: 26px;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    text-align: right;
-    min-height: 40px;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-/* input */
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
-}
+    h2 {
+      margin-bottom: 20px;
+    }
 
-/* bottoni */
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
+    /* Input */
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      transition: 0.3s;
+    }
 
-button {
-    padding: 15px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background: #444;
-    color: white;
-    transition: all 0.2s ease;
-}
+    /* Effetto focus */
+    input:focus {
+      box-shadow: 0 0 8px #8ab4f8;
+      transform: scale(1.03);
+    }
 
-button:hover {
-    background: #666;
-    transform: scale(1.05);
-}
+    /* Messaggi di errore */
+    .error {
+      color: #ff6b6b;
+      font-size: 13px;
+      margin-bottom: 10px;
+      display: block;
+    }
 
-/* bottone uguale */
-.equals {
-    background: #00c896;
-    color: black;
-    grid-column: span 2;
-}
+    /* Bottone */
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #8ab4f8;
+      color: #1e1e2f;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: bold;
+    }
 
-.equals:hover {
-    background: #00e6aa;
-}
+    button:hover {
+      background: #6ea8fe;
+      transform: scale(1.05);
+    }
 
-/* operazioni */
-.operator {
-    background: #ff9500;
-}
-
-.operator:hover {
-    background: #ffaa33;
-}
-</style>
+    /* Messaggio finale */
+    #output {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #fff;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="calculator">
-    <div id="result" class="display">Risultato: 0</div>
+  <div class="container">
+    <h2>Inserisci i tuoi dati</h2>
 
-    <input type="number" id="num1" placeholder="Primo numero">
-    <input type="number" id="num2" placeholder="Secondo numero">
+    <form id="formPersona">
+      <label>Nome:</label>
+      <input type="text" id="nome" required>
+      <span id="erroreNome" class="error"></span> <!-- errore nome -->
 
-    <div class="buttons">
-        <button class="operator" onclick="calculate('+')">+</button>
-        <button class="operator" onclick="calculate('-')">-</button>
-        <button class="operator" onclick="calculate('*')">*</button>
-        <button class="operator" onclick="calculate('/')">/</button>
+      <label>Cognome:</label>
+      <input type="text" id="cognome" required>
+      <span id="erroreCognome" class="error"></span> <!-- errore cognome -->
 
-        <button class="operator" onclick="calculate('**')">^</button>
-        <button onclick="clearFields()">C</button>
-        <button class="equals" onclick="calculate('+')">=</button>
-    </div>
-</div>
+      <label>Età:</label>
+      <input type="number" id="eta" required><br><br>
 
-<script>
-function calculate(operation) {
+      <button type="submit">Invia</button>
+    </form>
 
-    let num1 = parseFloat(document.getElementById("num1").value);
-    let num2 = parseFloat(document.getElementById("num2").value);
-    let resultDiv = document.getElementById("result");
+    <div id="output"></div>
+  </div>
 
-    if (isNaN(num1) || isNaN(num2)) {
-        resultDiv.textContent = "Errore: Inserisci due numeri validi."; // mostra un messaggio di errore
-        return; // interrompe l'esecuzione della funzione
-    }
+  <script>
+    // Prendo il form tramite ID
+    const form = document.getElementById("formPersona");
 
-    let result; // variabile che conterra' il risultato del calcolo
+    form.addEventListener("submit", function(event) {
 
-    try { // blocco che prova ad eseguire il codice e gestisce eventuali errori
+      event.preventDefault(); // blocca il refresh
 
-        if (operation === "+") { // controlla se l'operazione richiesta e' una somma
-            result = num1 + num2; // esegue la somma
-        }
-        else if (operation === "-") { // controlla se l'operazione richiesta e' una sottrazione
-            result = num1 - num2; // esegue la sottrazione
-        }
-        else if (operation === "*") { // controlla se l'operazione richiesta e' una moltiplicazione
-            result = num1 * num2; // esegue la moltiplicazione
-        }
-        else if (operation === "/") { // controlla se l'operazione richiesta e' una divisione
+      // Recupero valori
+      const nome = document.getElementById("nome").value;
+      const cognome = document.getElementById("cognome").value;
+      const eta = document.getElementById("eta").value;
 
-            if(num2 === 0){ // verifica se il secondo numero e' zero
-                throw new Error("Divisione per zero non possibile"); // genera un errore se si tenta di dividere per zero
-            }
+      // Recupero campi errore
+      const erroreNome = document.getElementById("erroreNome");
+      const erroreCognome = document.getElementById("erroreCognome");
 
-            result = num1 / num2; // esegue la divisione
-        }
-        else if (operation === "**") { // controlla se l'operazione richiesta e' una potenza
-            result = num1 ** num2; // calcola la potenza (num1 elevato a num2)
-        }
-        else { // se l'operazione inserita non e' tra quelle previste
-            throw new Error("Operazione non valida"); // genera un errore
-        }
+      // Reset errori precedenti
+      erroreNome.textContent = "";
+      erroreCognome.textContent = "";
 
-        resultDiv.textContent = "Risultato: " + result; // mostra il risultato nella pagina
+      let valido = true; // variabile per controllo generale
 
-    } catch (error) { // cattura eventuali errori generati nel blocco try
+      // Controllo se ci sono numeri nel nome
+      if (/\d/.test(nome)) { // \d controlla se c'è almeno un numero
+        erroreNome.textContent = "Il nome non può contenere numeri";
+        valido = false;
+      }
 
-        resultDiv.textContent = "Errore: " + error.message; // mostra il messaggio di errore nella pagina
+      // Controllo se ci sono numeri nel cognome
+      if (/\d/.test(cognome)) {
+        erroreCognome.textContent = "Il cognome non può contenere numeri";
+        valido = false;
+      }
 
-    }
+      // Se non valido interrompe tutto
+      if (!valido) return;
 
-}
+      // Creo l'oggetto persona
+      const persona = {
+        nome: nome,
+        cognome: cognome,
+        eta: eta
+      };
 
-function clearFields(){
-    document.getElementById("num1").value = "";
-    document.getElementById("num2").value = "";
-    document.getElementById("result").textContent = "Risultato: 0";
-}
-</script>
+      console.log(persona); // stampa oggetto
+
+      // Messaggio utente
+      document.getElementById("output").textContent =
+        "Ciao " + nome + " " + cognome + ", età: " + eta;
+
+      form.reset(); // reset form
+    });
+  </script>
 
 </body>
 </html>
