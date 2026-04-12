@@ -129,4 +129,6 @@ function statisticheBiblioteca(libri) {
   };
 }
 
+console.log("TEST FUNZIONE");
+stampaBiblioteca(biblioteca);
 console.log("\n=== FINE ESERCITAZIONE 1 ===");
