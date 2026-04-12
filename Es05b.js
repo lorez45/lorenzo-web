@@ -1,4 +1,4 @@
-/**
+/** 
  * ESERCITAZIONE 1 - LIVELLO BASE
  * Gestione di una Biblioteca di Libri
  */
@@ -10,20 +10,20 @@ console.log("=== ESERCITAZIONE 1: BIBLIOTECA DI LIBRI ===\n");
 // ============================================================================
 
 const libro1 = {
-  titolo: "Il Signore degli Anelli", 
-  autore: "J.R.R. Tolkien", 
-  anno: 1954, 
-  genere: "Fantasy", 
-  pagine: 1178, 
+  titolo: "Dune", 
+  autore: "Frank Herbert", 
+  anno: 1965, 
+  genere: "Fantascienza", 
+  pagine: 688, 
   disponibile: true 
 };
 
 const libro2 = {
-  titolo: "1984",
-  autore: "George Orwell",
-  anno: 1949,
-  genere: "Distopia",
-  pagine: 328,
+  titolo: "Il Codice Da Vinci",
+  autore: "Dan Brown",
+  anno: 2003,
+  genere: "Thriller",
+  pagine: 454,
   disponibile: false // inizialmente non disponibile
 };
 
@@ -38,17 +38,17 @@ console.log(`Titolo: ${libro1.titolo} - Autore: ${libro1.autore}`);
 libro2.disponibile = true;
 
 // aggiunge una nuova proprietà (isbn) a libro1
-libro1.isbn = "978-0544003415";
+libro1.isbn = "978-0441013593";
 
 // ============================================================================
 // PARTE 3: Metodi degli Oggetti
 // ============================================================================
 
 const libro3 = {
-  titolo: "Il Nome della Rosa",
-  autore: "Umberto Eco",
-  anno: 1980,
-  pagine: 503,
+  titolo: "La ragazza del treno",
+  autore: "Paula Hawkins",
+  anno: 2015,
+  pagine: 306,
   disponibile: true,
   
   // restituisce una stringa con le info principali del libro
