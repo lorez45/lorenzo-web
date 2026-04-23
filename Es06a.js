@@ -1,14 +1,12 @@
-// funzione che esegue il calcolo tra due numeri
-function calcolatrice(num1, operazione, num2) {
+// funzione che esegue il calcolo
+function calcolatrice(num1, operazione, num2) { // prende due numeri e un'operazione
 
-    // controllo se i numeri sono validi
     if (isNaN(num1) || isNaN(num2)) {
-        return "Errore: numeri non validi"; // restituisce errore se non sono numeri
+        return "Errore: numeri non validi"; // controlla se i valori sono numeri
     }
 
     let risultato;
 
-    // controllo dell'operazione richiesta
     if (operazione === "+") {
         risultato = num1 + num2; // somma
     }
@@ -20,7 +18,7 @@ function calcolatrice(num1, operazione, num2) {
     }
     else if (operazione === "/") {
         if (num2 === 0) {
-            return "Errore: divisione per zero"; // controllo divisione per zero
+            return "Errore: divisione per zero"; // controllo errore
         }
         risultato = num1 / num2; // divisione
     }
@@ -28,16 +26,17 @@ function calcolatrice(num1, operazione, num2) {
         risultato = num1 ** num2; // potenza
     }
     else {
-        return "Errore: operazione non valida"; // errore se operazione non riconosciuta
+        return "Errore: operazione non valida"; // errore operazione
     }
 
-    return risultato; // restituisce il risultato finale
+    return risultato; // restituisce il risultato
 }
 
 
-// esempio di utilizzo (simula input utente)
-const n1 = 5;
-const op = "+";
-const n2 = 3;
+// 🔽 INPUT UTENTE
+let n1 = parseFloat(prompt("Inserisci il primo numero:")); // chiede il primo numero
+let op = prompt("Inserisci operazione (+, -, *, /, **):"); // chiede operazione
+let n2 = parseFloat(prompt("Inserisci il secondo numero:")); // chiede secondo numero
 
+// OUTPUT
 console.log("Risultato:", calcolatrice(n1, op, n2)); // stampa risultato
