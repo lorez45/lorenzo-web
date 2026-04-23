@@ -33,10 +33,10 @@ function calcolatrice(num1, operazione, num2) { // prende due numeri e una strin
 }
 
 
-// 🔽 INPUT da terminale (Node.js)
+// INPUT da terminale 
 const num1 = parseFloat(process.argv[2]); // primo numero inserito da terminale
 const operazione = process.argv[3]; // operazione inserita (+, -, *, /, **)
 const num2 = parseFloat(process.argv[4]); // secondo numero inserito
 
-// 🔽 OUTPUT
+// OUTPUT
 console.log("Risultato:", calcolatrice(num1, operazione, num2)); // stampa risultato
