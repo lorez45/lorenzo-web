@@ -1,0 +1,40 @@
+<!DOCTYPE html> <!-- HTML5 -->
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Esercizio Maiuscolo</title>
+</head>
+
+<body>
+
+<h2>Esercizio D - Maiuscolo</h2>
+
+<!-- Input testo -->
+<input type="text" id="testo" placeholder="Scrivi qualcosa">
+
+<br><br>
+
+<!-- Pulsante conversione -->
+<button onclick="convertiMaiuscolo()">
+    Converti
+</button>
+
+<script>
+
+    // Funzione che converte il testo in maiuscolo
+    function convertiMaiuscolo() { // ← funzione principale
+
+        // prende il valore dell'input
+        let t = document.getElementById("testo").value;
+
+        // converte in maiuscolo
+        let risultato = t.toUpperCase();
+
+        // riscrive il valore nell'input
+        document.getElementById("testo").value = risultato;
+    }
+
+</script>
+
+</body>
+</html>
