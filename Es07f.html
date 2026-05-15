@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Tavola Pitagorica Evidenziata</title>
+
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        /* stile per righe evidenziate */
+        .evidenziato {
+            background-color: lightblue; /* colore evidenza */
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Tavola Pitagorica con righe evidenziate</h2>
+
+<button onclick="creaTabella()">
+    Genera tabella
+</button>
+
+<div id="contenitore"></div>
+
+<script>
+
+    // Funzione che crea la tabella e evidenzia righe dispari
+    function creaTabella() { // ← funzione principale
+
+        let table = document.createElement("table"); // crea tabella
+
+        for (let i = 1; i <= 10; i++) {
+
+            let riga = document.createElement("tr"); // crea riga
+
+            // se la riga è dispari
+            if (i % 2 !== 0) {
+
+                // aggiunge attributo class "evidenziato"
+                riga.setAttribute("class", "evidenziato");
+            }
+
+            for (let j = 1; j <= 10; j++) {
+
+                let cella = document.createElement("td"); // crea cella
+                cella.textContent = i * j; // inserisce valore
+
+                riga.appendChild(cella); // aggiunge cella alla riga
+            }
+
+            table.appendChild(riga); // aggiunge riga alla tabella
+        }
+
+        document.getElementById("contenitore")
+            .appendChild(table); // inserisce tabella nella pagina
+    }
+
+</script>
+
+</body>
+</html>
