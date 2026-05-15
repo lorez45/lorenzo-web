@@ -1,0 +1,60 @@
+<!DOCTYPE html> <!-- HTML5 -->
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Esercizio Pulsanti</title>
+</head>
+
+<body>
+
+<h2>Esercizio C - Stile Pulsanti</h2>
+
+<!-- Input colore testo -->
+<input type="text" id="coloreTesto" placeholder="Colore testo">
+
+<!-- Input colore sfondo -->
+<input type="text" id="coloreSfondo" placeholder="Colore sfondo">
+
+<br><br>
+
+<!-- Pulsante per applicare modifiche -->
+<button onclick="modificaPulsanti()">
+    Applica stile
+</button>
+
+<hr>
+
+<!-- Pulsanti da modificare -->
+<button>Pulsante 1</button>
+<button>Pulsante 2</button>
+<button>Pulsante 3</button>
+
+<script>
+
+    // Funzione che modifica lo stile dei pulsanti
+    function modificaPulsanti() { // ← funzione principale
+
+        // prende colore testo
+        let ct = document.getElementById("coloreTesto").value;
+
+        // prende colore sfondo
+        let cs = document.getElementById("coloreSfondo").value;
+
+        // seleziona tutti i button
+        let pulsanti = document.querySelectorAll("button");
+
+        // ciclo su ogni pulsante
+        pulsanti.forEach(function(b) {
+
+            b.style.color = ct; // colore testo
+            b.style.backgroundColor = cs; // colore sfondo
+            b.style.border = "2px solid black"; // bordo
+            b.style.borderRadius = "8px"; // angoli arrotondati
+            b.style.padding = "10px"; // spazio interno
+        });
+    }
+
+</script>
+
+</body>
+</html>
