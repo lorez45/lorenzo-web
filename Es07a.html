@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Esercizio Window</title>
+</head>
+<body>
+
+    <h2>Proprietà oggetto Window</h2>
+
+    <!-- Input dove l'utente inserisce la proprietà -->
+    <input type="text" id="proprieta" placeholder="Es: innerWidth">
+
+    <!-- Pulsante che esegue la funzione -->
+    <button onclick="mostraProprieta()">
+        Mostra proprietà
+    </button>
+
+    <script>
+
+        // Funzione che mostra la proprietà scelta dall'utente
+        function mostraProprieta() {
+
+            // Legge il valore scritto nella casella input
+            let proprieta =
+                document.getElementById("proprieta").value;
+
+            // Controlla se l'utente ha scritto innerWidth
+            if (proprieta === "innerWidth") {
+
+                // Mostra la larghezza interna della finestra
+                alert("Larghezza finestra: " + window.innerWidth);
+
+            // Controlla se l'utente ha scritto innerHeight
+            } else if (proprieta === "innerHeight") {
+
+                // Mostra l'altezza interna della finestra
+                alert("Altezza finestra: " + window.innerHeight);
+
+            // Controlla se l'utente ha scritto scrollX
+            } else if (proprieta === "scrollX") {
+
+                // Mostra lo scroll orizzontale
+                alert("Scroll orizzontale: " + window.scrollX);
+
+            // Controlla se l'utente ha scritto scrollY
+            } else if (proprieta === "scrollY") {
+
+                // Mostra lo scroll verticale
+                alert("Scroll verticale: " + window.scrollY);
+
+            } else {
+
+                // Messaggio se la proprietà non esiste
+                alert("Proprietà non valida");
+            }
+        }
+
+    </script>
+
+</body>
+</html>
