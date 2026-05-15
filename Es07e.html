@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Tavola Pitagorica</title>
+
+    <style>
+        table {
+            border-collapse: collapse; /* unisce i bordi */
+        }
+
+        td {
+            border: 1px solid black; /* bordo celle */
+            padding: 8px; /* spazio interno */
+            text-align: center; /* centra il testo */
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Tavola Pitagorica 10x10</h2>
+
+<button onclick="creaTabella()">
+    Genera tabella
+</button>
+
+<div id="contenitore"></div>
+
+<script>
+
+    // Funzione che crea dinamicamente la tavola pitagorica
+    function creaTabella() { // ← funzione principale
+
+        // crea elemento tabella
+        let table = document.createElement("table");
+
+        // ciclo righe 1-10
+        for (let i = 1; i <= 10; i++) {
+
+            // crea riga
+            let riga = document.createElement("tr");
+
+            // ciclo colonne 1-10
+            for (let j = 1; j <= 10; j++) {
+
+                // crea cella
+                let cella = document.createElement("td");
+
+                // inserisce il prodotto i*j
+                cella.textContent = i * j;
+
+                // aggiunge cella alla riga
+                riga.appendChild(cella);
+            }
+
+            // aggiunge riga alla tabella
+            table.appendChild(riga);
+        }
+
+        // inserisce tabella nel div contenitore
+        document.getElementById("contenitore").appendChild(table);
+    }
+
+</script>
+
+</body>
+</html>
