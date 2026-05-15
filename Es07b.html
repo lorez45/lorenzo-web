@@ -1,0 +1,54 @@
+<!DOCTYPE html> <!-- HTML5 -->
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Esercizio Navigator</title>
+</head>
+
+<body>
+
+<h2>Esercizio B - Navigator</h2>
+
+<!-- Input per scegliere la proprietà -->
+<input type="text" id="scelta" placeholder="language, platform, userAgent, onLine">
+
+<!-- Pulsante per eseguire la funzione -->
+<button onclick="mostraNavigator()">
+    Mostra info
+</button>
+
+<script>
+
+    // Funzione che mostra informazioni del browser
+    function mostraNavigator() { // ← funzione principale
+
+        // legge input utente
+        let s = document.getElementById("scelta").value;
+
+        // controlla cosa ha inserito l'utente
+        if (s === "language") {
+
+            alert("Lingua: " + navigator.language); // lingua browser
+
+        } else if (s === "platform") {
+
+            alert("Sistema: " + navigator.platform); // sistema operativo
+
+        } else if (s === "userAgent") {
+
+            alert("UserAgent: " + navigator.userAgent); // info browser
+
+        } else if (s === "onLine") {
+
+            alert("Online: " + navigator.onLine); // stato connessione
+
+        } else {
+
+            alert("Valore non valido"); // errore input
+        }
+    }
+
+</script>
+
+</body>
+</html>
